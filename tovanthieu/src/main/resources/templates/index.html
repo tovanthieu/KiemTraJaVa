@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý nhân sự</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <style>
+    h2 {
+      color: red;
+    }
+
+    .add-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .add-button:hover {
+      background-color: #0069d9;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+<h2>Danh sách nhân viên</h2>
+<h2 style="color: red;">Tô Văn Thiều - 2080601206</h2>
+<table border="1">
+  <tr>
+    <th>Mã NV</th>
+    <th>Tên NV</th>
+    <th>Giới tính</th>
+    <th>Nơi sinh</th>
+    <th>Mã phòng</th>
+    <th>Lương</th>
+    <th></th>
+  </tr>
+  <tr th:each="nhanVien : ${nhanViens}">
+    <td th:text="${nhanVien.maNV}"></td>
+    <td th:text="${nhanVien.tenNV}"></td>
+    <td>
+      <img th:if="${nhanVien.phai == 'NU'}" src="../images/nu.png" alt="Nữ" style="width: 50%; height: auto;" />
+      <img th:if="${nhanVien.phai == 'NAM'}" src="../images/nam.png" alt="Nam" style="width: 50%; height: auto;" />
+    </td>
+    <td th:text="${nhanVien.noiSinh}"></td>
+    <td th:text="${nhanVien.maPhong}"></td>
+    <td th:text="${nhanVien.luong}"></td>
+    <td>
+      <a th:href="@{/nhanvien/edit/{maNV}(maNV=${nhanVien.maNV})}">
+        <i class="fas fa-edit"></i> Sửa
+      </a>
+      <a th:href="@{/nhanvien/delete/{maNV}(maNV=${nhanVien.maNV})}">
+        <i class="fas fa-trash"></i> Xóa
+      </a>
+    </td>
+  </tr>
+</table>
+<br/>
+<h2>Danh sách phòng ban</h2>
+<table border="1">
+  <tr>
+    <th>Mã phòng</th>
+    <th>Tên phòng</th>
+  </tr>
+  <tr th:each="phongBan : ${phongBans}">
+    <td th:text="${phongBan.maPhong}"></td>
+    <td th:text="${phongBan.tenPhong}"></td>
+  </tr>
+</table>
+<br/>
+<a href="/nhanvien/add" class="add-button">Thêm nhân viên</a>
+</body>
+</html>

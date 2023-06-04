@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa nhân viên</title>
+</head>
+<body>
+<h2>Sửa nhân viên</h2>
+<form method="post" th:action="@{/nhanvien/update/{maNV}(maNV=${nhanVien.maNV})}">
+  <input type="hidden" id="maNV" name="maNV" th:value="${nhanVien.maNV}"/>
+  <label for="tenNV">Tên NV:</label>
+  <input type="text" id="tenNV" name="tenNV" th:value="${nhanVien.tenNV}" required/>
+  <br/><br/>
+  <label for="phai">Phái:</label>
+  <input type="text" id="phai" name="phai" th:value="${nhanVien.phai}"/>
+  <br/><br/>
+  <label for="noiSinh">Nơi sinh:</label>
+  <input type="text" id="noiSinh" name="noiSinh" th:value="${nhanVien.noiSinh}"/>
+  <br/><br/>
+  <label for="maPhong">Mã phòng:</label>
+  <select id="maPhong" name="maPhong" required>
+    <option th:each="phongBan : ${phongBans}" th:value="${phongBan.maPhong}" th:text="${phongBan.maPhong} + ' - ' + ${phongBan.tenPhong}" th:selected="${nhanVien.maPhong == phongBan.maPhong}"></option>
+  </select>
+  <br/><br/>
+  <label for="luong">Lương:</label>
+  <input type="number" id="luong" name="luong" th:value="${nhanVien.luong}"/>
+  <br/><br/>
+  <button type="submit">Lưu</button>
+  <a href="/">Hủy</a>
+</form>
+</body>
+</html>
